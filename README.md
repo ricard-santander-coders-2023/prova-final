@@ -3,4 +3,4 @@
 ## Prova final
 
 
-#### Apresntado menu para seleção da questão (1, 2 ou 3) e 0 para sair.
+#### Apresentado menu para seleção da questão (1, 2 ou 3) e 0 para sair.
