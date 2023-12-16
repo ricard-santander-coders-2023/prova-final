@@ -17,30 +17,35 @@ public class Questao1 implements Questoes{
         System.out.print("Total meses: ");
         int meses = sc.nextInt();
 
-        amortizacao(saldo, juros, meses);
+        amortizacaoSAC(saldo, juros, meses);
         sc.close();
     };
 
-    private void amortizacao(double saldo_devedor_atual, double juros_ao_mes, int total_de_meses){
-
-        double saldoDevedor = saldo_devedor_atual;
-        double totalAmortizado = 0;
-        double totalJuros = 0;
+    private void amortizacaoSAC(double saldo_devedor_atual, double juros_ao_mes, int total_de_meses){
 
         double amortizacao = saldo_devedor_atual / total_de_meses;
-        System.out.printf("Valor fixo da amortização R$ %.2f, Saldo devedor total R$ %.2f com uma taxa de juros de %.1f%% ao mês\n", amortizacao, saldo_devedor_atual, juros_ao_mes);
+        double totalValorJuros = 0;
+        double totalPrestacao = 0;
+        double saldoOriginal = saldo_devedor_atual;
 
-        for (int i = 1; i <= i; i++) {
+        System.out.printf("Valor fixo da amortização R$ %.2f, Saldo devedor total R$ %.2f" +
+                " com uma taxa de juros de %.1f%% ao mês\n", amortizacao, saldo_devedor_atual, juros_ao_mes);
 
-            double jurosMensal = total_de_meses * (juros_ao_mes / 100);
-            double prestacaoMensal = jurosMensal + amortizacao;
+        for (int i = 1; i <= total_de_meses; i++) {
 
-            total_de_meses -= amortizacao;
-            totalAmortizado += amortizacao;
-            totalJuros += jurosMensal;
+            double jurosMensal = (saldo_devedor_atual * juros_ao_mes)/100;
+            double parcelaMensal = jurosMensal + amortizacao;
+           saldo_devedor_atual -= amortizacao;
 
-            System.out.printf("Parcela %d | Juros: R$ %.2f | Prestação: R$ %.2f | Saldo devedor: R$ %.2f\n", i, jurosMensal, prestacaoMensal, total_de_meses);
+            totalValorJuros += jurosMensal;
+            totalPrestacao += parcelaMensal;
+
+            System.out.printf("Parcela %d | Juros: R$ %.2f |" +
+                    " Prestação: R$ %.2f | Saldo devedor: R$ %.2f\n", i, jurosMensal, parcelaMensal, saldo_devedor_atual);
         }
+
+        System.out.printf("Total: Prestação R$ %.2f, Juros R$ %.2f, Amortização R$ %.2f", totalPrestacao, totalValorJuros, saldoOriginal);
+
     }
 
 }
